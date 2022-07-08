@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,12 +18,12 @@ void main() async {
   SharedPreferences.setMockInitialValues({});
   DioHelper.init();
   await CacheHelper.init();
-  bool? onBoarding = CacheHelper.getBool(key: 'onBoarding');
-  token = CacheHelper.getData(key: 'token');
+  bool onBoarding = CacheHelper.getBool(key: 'onBoarding');
+  token = CacheHelper.getData(key: 'token') ?? '';
   final Widget widget;
 
-  if (onBoarding == null) {
-    if (token == null) {
+  if (onBoarding) {
+    if (token != '') {
       widget = const ShopLayout();
     } else {
       widget = LoginScreen();
@@ -62,7 +61,7 @@ class MyApp extends StatelessWidget {
         builder: (context, state) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            home: LoginScreen(),
+            home: startWidget,
             theme: lightTheme,
           );
         },
