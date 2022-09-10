@@ -15,7 +15,6 @@ import 'layout/shop_layout.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences.setMockInitialValues({});
   DioHelper.init();
   await CacheHelper.init();
   bool onBoarding = CacheHelper.getBool(key: 'onBoarding');
